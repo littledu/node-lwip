@@ -1,29 +1,34 @@
 # Fix line endings in Windows. (runs before repo cloning)
+#
+version: "{build}"
+
+os: Visual Studio 2014 CTP4
+
 init:
   - git config --global core.autocrlf input
 
 environment:
+  ACCESS_KEY:
+    secure: eUnT85Y_aAbKlYuvgBftLO1AvdjzBEf_e2MA3P2I
+  SECRET_KEY:
+    secure: zs7hNvA5LimBYklHP-OAwFdhZg_ik6oOBb52vWaG
   matrix:
-    - nodejs_version: "0.10"
-      msvs_version: 2013
-    - nodejs_version: "0.12"
-      msvs_version: 2013
-    - nodejs_version: "4.0"
-      msvs_version: 2013
-    - nodejs_version: "4.0"
-      msvs_version: 2015
-    - nodejs_version: "4.1"
-      msvs_version: 2013
-    - nodejs_version: "4.1"
-      msvs_version: 2015
+    - nodejs_version: 4.2.0
+      platform: x86
+      msvs_toolset: 12
+    - nodejs_version: 4.2.0
+      platform: x64
+      msvs_toolset: 12
+
+
 
 install:
   - ps: Install-Product node $env:nodejs_version
   - ps: npm install --msvs_version=$env:msvs_version
+  - node -v
+  - npm run publishbinary
 
-test_script:
-  - ps: npm test
 
-build: off
-
-version: "{build}"
+build: OFF
+test: OFF
+deploy: OFF

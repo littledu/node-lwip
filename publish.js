@@ -21,7 +21,7 @@ if (process.argv.indexOf("--build") > 0) {
     qiniu.conf.ACCESS_KEY = config['ACCESS_KEY'];
     qiniu.conf.SECRET_KEY = config['SECRET_KEY'];
 
-    var uptoken = new qiniu.rs.PutPolicy('lwip').token();
+    var uptoken = new qiniu.rs.PutPolicy('test').token();
 
     for (var i = 0; i < opts.length; i++) {
         uploadFile(opts[i].module, opts[i].hosted_tarball.replace(opts[i].host, ''), uptoken);
@@ -49,14 +49,15 @@ if (process.argv.indexOf("--build") > 0) {
 
     function downFile(localFilePath, remoteFilePath) {
         var file = fs.createWriteStream(localFilePath);
+        remoteFilePath = 'http://' + remoteFilePath
         http.get(remoteFilePath, function (response) {
             response.pipe(file);
             file.on('finish', function () {
                 console.log('下载完成', localFilePath)
             });
         }).on('error', function (err) {
-            fs.unlink(dest);
-            console.log('下载失败', localFilePath, err.message)
+            // fs.unlink(dest);
+            console.log('下载失败', localFilePath, err)
         });
     }
 
