@@ -24,7 +24,6 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: npm install --msvs_version=$env:msvs_version
   - node -v
   - npm run publishbinary
 
