@@ -27,12 +27,12 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - node -v
-  #- npm install async
-  #- npm install decree
-  #- npm install nan
-  #- npm install qiniu
-  #- npm install rc
-  #- npm install semver
+  - npm install async
+  - npm install decree
+  - npm install nan
+  - npm install qiniu
+  - npm install rc
+  - npm install semver
   #- npm run publishbinary
   - node publish.js --build
 
