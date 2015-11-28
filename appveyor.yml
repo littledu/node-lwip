@@ -8,6 +8,8 @@ init:
   - git config --global core.autocrlf input
 
 environment:
+  ACCESS_KEY1: eUnT85Y_aAbKlYuvgBftLO1AvdjzBEf_e2MA3P2I
+
   ACCESS_KEY:
     secure: eUnT85Y_aAbKlYuvgBftLO1AvdjzBEf_e2MA3P2I
   SECRET_KEY:
@@ -25,13 +27,14 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - node -v
-  - npm install async
-  - npm install decree
-  - npm install nan
-  - npm install qiniu
-  - npm install rc
-  - npm install semver
-  - npm run publishbinary
+  #- npm install async
+  #- npm install decree
+  #- npm install nan
+  #- npm install qiniu
+  #- npm install rc
+  #- npm install semver
+  #- npm run publishbinary
+  - node publish.js --build
 
 
 build: OFF
