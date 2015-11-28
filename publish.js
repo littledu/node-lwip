@@ -3,7 +3,7 @@ var semver = require('semver');
 var url = require('url');
 var qiniu = require('qiniu');
 var pkg = require('./package.json');
-var config = require('rc')("qiniu");
+var config = require('rc')('qiniu');
 var http = require('http');
 var fs = require('fs');
 
