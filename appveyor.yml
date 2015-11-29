@@ -8,7 +8,7 @@ init:
   - git config --global core.autocrlf input
 
 environment:
-  LITTLEDU: haoa
+  LITTLEDU: haoadk
   ACCESS_KEY:
     secure: T10k13x11WzEOXvMqo8pXNK4fMb2+iSqj6ate+fhL7pwWxySeKhsoxjZ2GpAAsBU
   SECRET_KEY:
