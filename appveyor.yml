@@ -8,6 +8,7 @@ init:
   - git config --global core.autocrlf input
 
 environment:
+  LITTLEDU: haoa
   ACCESS_KEY:
     secure: T10k13x11WzEOXvMqo8pXNK4fMb2+iSqj6ate+fhL7pwWxySeKhsoxjZ2GpAAsBU
   SECRET_KEY:
@@ -49,6 +50,7 @@ install:
   #- if "%msvs_toolset%" == "14" powershell Write-Output "https://mapbox.s3.amazonaws.com/node-cpp11/vcredist_$env:platform.exe"
   #- if "%msvs_toolset%" == "14" powershell Start-FileDownload "https://mapbox.s3.amazonaws.com/node-cpp11/vcredist_$env:platform.exe"
   #- if "%msvs_toolset%" == "14" .\vcredist_%platform%.exe /q /norestart
+  - ls env:
   - node -v
   - node -e "console.log(process.argv,process.execPath)"
   - npm -v
