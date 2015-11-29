@@ -20,22 +20,8 @@ environment:
       platform: x64
       msvs_toolset: 14
 
-
-
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - node -v
-  - npm install --build-from-source
-
-  # - npm install async
-  # - npm install decree
-  # - npm install nan
-  # - npm install qiniu
-  # - npm install rc
-  # - npm install semver
-  #- npm run publishbinary
-  # - node publish.js --build
-
+  - scripts\build-appveyor.bat
 
 
 build: OFF

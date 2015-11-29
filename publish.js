@@ -21,8 +21,6 @@ if (process.argv.indexOf("--build") > 0) {
     qiniu.conf.ACCESS_KEY = config['ACCESS_KEY'];
     qiniu.conf.SECRET_KEY = config['SECRET_KEY'];
 
-    console.log(config);
-
     var uptoken = new qiniu.rs.PutPolicy('test').token();
 
     for (var i = 0; i < opts.length; i++) {
