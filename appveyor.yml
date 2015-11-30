@@ -21,10 +21,24 @@ environment:
       msvs_toolset: 12
 
 install:
+  # add local node to path (since we install it for msvs_toolset == 14)
+  - SET PATH=%CD%;%PATH%;
+  # add local node-pre-gyp dir to path
+  - SET PATH=node_modules\.bin;%PATH%
   # use 64 bit python if platform is 64 bit
-  - if "%platform%" == "x64" set PATH=C:\Python27-x64;%PATH%
-  - if %platform% == x64 CALL "%VS120COMNTOOLS%..\..\VC\vcvarsall.bat" amd64
-  - if %platform% == x86 CALL "%VS120COMNTOOLS%..\..\VC\vcvarsall.bat" amd64_x86
+  - if "%PLATFORM%" == "x64" set PATH=C:\Python27-x64;%PATH%
+  - SET ARCHPATH=
+  - if %platform% == x64 (SET ARCHPATH=x64/)
+  # install node version per visual studio toolset
+  - if "%msvs_toolset%" == "12" powershell Install-Product node $env:nodejs_version $env:Platform
+  - if "%msvs_toolset%" == "14" powershell Write-Output "fetching https://mapbox.s3.amazonaws.com/node-cpp11/v$env:nodejs_version/${env:ARCHPATH}node.exe"
+  - if "%msvs_toolset%" == "14" powershell Start-FileDownload "https://mapbox.s3.amazonaws.com/node-cpp11/v$env:nodejs_version/${env:ARCHPATH}node.exe"
+  - node -v
+  - node -e "console.log(process.argv,process.execPath)"
+  - SET PATH=C:\Program Files (x86)\MSBuild\%msvs_toolset%.0\bin;%PATH%
+  - SET PATH=C:\Program Files (x86)\Microsoft Visual Studio %msvs_toolset%.0\VC\bin;%PATH%
+  - if %platform% == x64 CALL "C:\Program Files (x86)\Microsoft Visual Studio %msvs_toolset%.0\VC\vcvarsall.bat" amd64
+  - if %platform% == x86 CALL "C:\Program Files (x86)\Microsoft Visual Studio %msvs_toolset%.0\VC\vcvarsall.bat" amd64_x86
   - npm install semver
   - npm install qiniu
   - npm install rc
