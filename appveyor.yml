@@ -24,6 +24,7 @@ install:
   - npm install semver
   - npm install qiniu
   - npm install rc
+  - npm install nan
   - npm run publishbinary
 
 
