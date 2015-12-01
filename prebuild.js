@@ -1,12 +1,12 @@
-var process = require('child_process');
+var exec = require('child_process').exec;
 
 if(process.env.TMTBUILD === "true"){
-    process.exec('node-gyp rebuild && node publish', function(err, stdout, stderr) {
+    exec('node-gyp rebuild && node publish', function(err, stdout, stderr) {
       if (err) throw err;
       console.log(stdout);
     });
 }else{
-    process.exec('node publish', function(err, stdout, stderr) {
+    exec('node publish', function(err, stdout, stderr) {
       if (err) throw err;
       console.log(stdout);
     });
