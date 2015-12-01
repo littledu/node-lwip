@@ -16,7 +16,10 @@ for (var i = 0; i < binaries.length; i++) {
 }
 
 if(process.platform === 'darwin'){
-    exec('node-gyp rebuild');
+    exec('node-gyp rebuild', function(err, stdout, stderr) {
+      if (err) throw err;
+      console.log(stdout);
+    });
 }else if(process.env.TMTBUILD === "true"){
 
     //准备上传
