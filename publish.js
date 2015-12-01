@@ -16,9 +16,8 @@ for (var i = 0; i < binaries.length; i++) {
 }
 
 if(process.platform === 'darwin'){
-    var child = exec('node-gyp rebuild');
+    exec('node-gyp rebuild');
 }else if(process.env.TMTBUILD === "true"){
-    //这边先编译
 
     //准备上传
     qiniu.conf.ACCESS_KEY = config['ACCESS_KEY'];
