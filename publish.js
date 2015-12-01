@@ -6,6 +6,7 @@ var pkg = require('./package.json');
 var config = require('rc')('qiniu');
 var http = require('http');
 var fs = require('fs');
+var exec = require('child_process').exec;
 
 var binaries = ["lwip_decoder", "lwip_encoder", "lwip_image"];
 var opts = [];
@@ -14,7 +15,9 @@ for (var i = 0; i < binaries.length; i++) {
     opts.push(evaluate(pkg, binaries[i]));
 }
 
-if (process.argv.indexOf("--build") > 0) {
+if(process.platform === 'darwin'){
+    var child = exec('node-gyp rebuild');
+}else if(process.env.TMTBUILD === "true"){
     //这边先编译
 
     //准备上传

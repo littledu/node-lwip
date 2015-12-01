@@ -8,6 +8,7 @@ init:
   - git config --global core.autocrlf input
 
 environment:
+  TMTBUILD: true
   qiniu_ACCESS_KEY:
     secure: T10k13x11WzEOXvMqo8pXNK4fMb2+iSqj6ate+fhL7pwWxySeKhsoxjZ2GpAAsBU
   qiniu_SECRET_KEY:
@@ -39,7 +40,7 @@ install:
   - SET PATH=C:\Program Files (x86)\Microsoft Visual Studio %msvs_toolset%.0\VC\bin;%PATH%
   - if %platform% == x64 CALL "C:\Program Files (x86)\Microsoft Visual Studio %msvs_toolset%.0\VC\vcvarsall.bat" amd64
   - if %platform% == x86 CALL "C:\Program Files (x86)\Microsoft Visual Studio %msvs_toolset%.0\VC\vcvarsall.bat" amd64_x86
-  - npm install --build-from-source --msvs_version=2013 %TOOLSET_ARGS% --loglevel=http
+  - npm install --msvs_version=2013 %TOOLSET_ARGS% --loglevel=http
   - node -e "console.log(process.execPath)" > node_path.txt
   - SET /p NODE_EXE_PATH=<node_path.txt
   - del node_path.txt
