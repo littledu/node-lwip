@@ -15,12 +15,7 @@ for (var i = 0; i < binaries.length; i++) {
     opts.push(evaluate(pkg, binaries[i]));
 }
 
-if(process.platform === 'darwin'){
-    exec('node-gyp rebuild', function(err, stdout, stderr) {
-      if (err) throw err;
-      console.log(stdout);
-    });
-}else if(process.env.TMTBUILD === "true"){
+if(process.args.indexOf('publish') > -1){
 
     //准备上传
     qiniu.conf.ACCESS_KEY = config['ACCESS_KEY'];
@@ -63,6 +58,9 @@ if(process.platform === 'darwin'){
         }).on('error', function (err) {
             // fs.unlink(dest);
             console.log('下载失败', localFilePath, err)
+
+
+            //这里执行 node-gyp rebuild
         });
     }
 
